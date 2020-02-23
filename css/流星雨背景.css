@@ -1,0 +1,68 @@
+body{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box; /* 这个属性可忽略,只是限制盒子不被内边距挤大 */
+	list-style: none;
+	overflow: hidden;
+	background-color: #000;
+}
+#app .star{
+	/* 使用伪元素制作尾巴,此处可以写流星头部的形状 */
+	/* 我觉得头部不带形状才好看,所以不写 */
+	width: 0;
+	height: 0;
+	position: relative;
+	opacity: 0;
+	animation: star-fall 3s linear infinite;
+	z-index: -1;
+}
+.star::after{
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	/* 这里用边框写了个长三角形作为流星的尾巴 */
+	border: 3px solid transparent;
+	border-left-width: 200px;
+	border-left-color: rgba(255,255,255,.7);
+	/* 变形,旋转-45° 拉伸 */
+	transform: rotate(-45deg) translate3d(1px,3px,0);
+	/* 设置原点 */
+	transform-origin: 0% 100%;
+}
+
+.container{
+	width: 500px;
+	height: 500px;
+	margin: 50px auto;
+	background-color: #fff;
+	opacity: 0.6;
+	text-align: center;
+}
+.container h1{
+	padding-top: 100px;
+	color: pink;
+}
+
+/* 流星滑落动画 */
+@keyframes star-fall {
+      0% {
+        opacity: 0;
+        transform: scale(0.5) translate3d(0, 0, 0);
+		/* 兼容一些浏览器 */
+        -webkit-transform: scale(0.5) translate3d(0, 0, 0); 
+        -moz-transform: scale(0.5) translate3d(0, 0, 0);
+      }
+      50% {
+        opacity: 1;
+        transform: translate3d(-200px, 200px, 0);
+        -webkit-transform: translate3d(-200px, 200px, 0);
+        -moz-transform: translate3d(-200px, 200px, 0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.2) translate3d(-300px, 300px, 0);
+        -webkit-transform: scale(1.2) translate3d(-300px, 300px, 0);
+        -moz-transform: scale(1.2) translate3d(-300px, 300px, 0);
+      }
+}

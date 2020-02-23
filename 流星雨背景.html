@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/流星雨背景.css"/>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li class="star" v-for="item in starCount" :key="item.id"
+					:style="{top:item.top+'px',left:item.left+'px',animationDelay:item.delay+'s'}"
+				></li>
+			</ul>
+			<div class="container">
+				<h1>B站:雨蒙蒙z</h1>
+			</div>
+		</div>
+		<script type="text/javascript">
+			let app = new Vue({
+				el:"#app",
+				data:{
+					starCount:[]  //定义数组存储星星的一些属性以及个数
+				},
+				methods:{
+					setStarCount() { //生成星星的方法
+						for(let i = 0; i < 30; i++) { // i < 星星个数
+							let star = {} //定义存储一个星星的对象
+							let top = parseInt(Math.random()*1000) //定义星星的top值
+							let left = parseInt(Math.random()*1500)  //定义星星的left值
+							let delay = parseInt(Math.random()*10)  //定义星星的动画延迟时间
+							star.id = i
+							star.top = top
+							star.left = left
+							star.delay = delay
+							this.starCount.push(star)
+						}
+					}
+				},
+				created() { //Vue实例的生命周期函数
+					this.setStarCount()
+				}
+			})
+		</script>
+	</body>
+</html>
